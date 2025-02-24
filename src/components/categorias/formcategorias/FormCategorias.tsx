@@ -14,17 +14,15 @@ function FormCategorias() {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // Função para buscar a categoria pelo ID
   async function buscarPorId(id: string) {
     try {
       const response = await buscar(`/categorias/${id}`, {});
-      setCategorias(response); // Preenche o estado com os dados da categoria
+      setCategorias(response);
     } catch (error) {
       alert("Erro ao buscar categoria.");
     }
   }
 
-  // Efeito para buscar a categoria quando o componente for renderizado e o id estiver presente
   useEffect(() => {
     if (id) {
       buscarPorId(id);
@@ -49,7 +47,7 @@ function FormCategorias() {
     try {
       let response;
       if (id) {
-        response = await atualizar(`/categorias/${id}`, categorias, {});
+        response = await atualizar(`/categorias`, categorias, {});
         alert("Categoria atualizada com sucesso!");
       } else {
         response = await cadastrar("/categorias", categorias, {});
@@ -97,7 +95,7 @@ function FormCategorias() {
         </div>
 
         <button
-          className="rounded text-slate-100 bg-indigo-400 hover:bg-indigo-800 w-1/2 py-2 mx-auto flex justify-center"
+          className="rounded text-slate-100 bg-blue-300 hover:bg-blue-500 w-1/2 py-2 mx-auto flex justify-center"
           type="submit"
         >
           {isLoading ? "Carregando..." : id ? "Atualizar" : "Cadastrar"}
